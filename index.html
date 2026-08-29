@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dimple — Birthday Edition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fffaf5;color:#241f20;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px 6%;background:rgba(255,250,245,.78);backdrop-filter:blur(12px);border-bottom:1px solid rgba(36,31,32,.08)}
+nav b{font-family:'Playfair Display';font-size:22px}nav a{color:inherit;text-decoration:none;margin-left:22px;font-size:14px}
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:110px 7% 70px;position:relative}
+.hero:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:#ffd8c8;filter:blur(8px);opacity:.55;top:10%;left:-170px}
+.hero:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:#dce8ff;filter:blur(10px);opacity:.65;bottom:-130px;right:-120px}
+.hero>*{position:relative;z-index:1}
+.kicker{letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:700;opacity:.65}
+h1{font-family:'Playfair Display';font-size:clamp(58px,11vw,130px);line-height:.88;margin:22px 0}
+.hero p{max-width:650px;margin:0 auto;font-size:18px;line-height:1.7;color:#5e5557}
+.btn{display:inline-block;margin-top:32px;padding:14px 22px;border-radius:999px;background:#241f20;color:white;text-decoration:none;font-weight:700;transition:.25s}.btn:hover{transform:translateY(-3px)}
+section{padding:110px 7%;max-width:1100px;margin:auto}.section-tag{text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:700;opacity:.5}
+h2{font-family:'Playfair Display';font-size:clamp(38px,6vw,66px);margin:12px 0 35px;line-height:1}
+.intro{font-size:20px;line-height:1.75;max-width:800px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:28px;border-radius:24px;background:white;border:1px solid #eee4de;box-shadow:0 12px 35px rgba(50,30,20,.05)}.card h3{margin-top:0;font-family:'Playfair Display';font-size:25px}.card p{line-height:1.65;color:#665d5e}
+.timeline{border-left:2px solid #e8d7cf;margin-left:10px;padding-left:30px}.moment{margin:0 0 42px;position:relative}.moment:before{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#241f20;left:-37px;top:5px}.moment h3{margin:0 0 7px;font-family:'Playfair Display';font-size:25px}.moment p{margin:0;line-height:1.7;color:#665d5e}
+.letter{background:#241f20;color:#fffaf5;border-radius:34px;padding:55px;position:relative;overflow:hidden}.letter:after{content:"♡";position:absolute;right:30px;top:-25px;font-size:180px;opacity:.06}.letter p{font-family:'Playfair Display';font-size:clamp(21px,3vw,29px);line-height:1.65;margin:0}.sign{margin-top:28px;font-family:'DM Sans';font-size:15px;opacity:.7}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.photo{aspect-ratio:1;border-radius:22px;background:#eee2da;display:grid;place-items:center;text-align:center;padding:20px;color:#7a6c68;font-size:14px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:contain;background:#eee2da;display:block}
+.reveal{opacity:0;transform:translateY(25px);transition:.7s}.reveal.show{opacity:1;transform:none}
+footer{text-align:center;padding:80px 20px 100px;color:#766b6c}.big{font-family:'Playfair Display';font-size:42px;color:#241f20}
+
+.reel-wrap{background:#171416;border-radius:34px;padding:14px;box-shadow:0 22px 70px rgba(30,20,20,.16)}
+.reel-video{display:block;width:100%;max-height:720px;border-radius:24px;background:#090808}
+.reel-caption{color:#d8ceca;text-align:center;padding:16px 8px 8px;font-size:13px;letter-spacing:.04em}
+
+@media(max-width:760px){nav a{display:none}.cards,.gallery{grid-template-columns:1fr}.letter{padding:32px}.hero{min-height:92vh}}
+
+.gallery-intro{max-width:820px;margin:-10px 0 35px;font-size:17px;line-height:1.7;color:#665d5e}
+.gallery{align-items:start}
+.photo-card{background:white;border:1px solid #eee4de;border-radius:24px;overflow:hidden;box-shadow:0 12px 35px rgba(50,30,20,.05)}
+.photo-card .photo{aspect-ratio:auto;height:auto;border-radius:0;background:#f3eee9;padding:0;display:block}
+.photo-card .photo img{width:100%;height:auto;max-height:560px;object-fit:contain;background:#f3eee9;display:block}
+.caption{padding:18px 20px 22px}
+.caption strong{font-family:'Playfair Display';font-size:21px}
+.caption p{margin:8px 0 0;line-height:1.65;color:#665d5e;font-size:14px}
+
+
+.gallery-outro{margin:32px auto 0;max-width:720px;text-align:center;color:#766b6c;font-size:14px;line-height:1.7;font-style:italic}
+
+
+#musicButton{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:100;
+  border:1px solid rgba(36,31,32,.12);
+  background:rgba(255,250,245,.88);
+  backdrop-filter:blur(12px);
+  color:#241f20;
+  padding:12px 16px;
+  border-radius:999px;
+  font-family:inherit;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(50,30,20,.08);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+#musicButton:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(50,30,20,.12)}
+#musicButton.playing{animation:musicPulse 1.5s ease-in-out infinite}
+@keyframes musicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@media(max-width:600px){
+  #musicButton{right:16px;bottom:16px;max-width:calc(100% - 32px)}
+}
+
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="Wallows.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" type="button" aria-label="Play music">
+  ♫ <span id="musicText">play something :)</span>
+</button>
+
+
+<header class="hero">
+  <div>
+    <div class="kicker">vadhdivsachya hardik shubeccha aka</div>
+    <h1>Happyy birthdayy Dimple</h1>
+    <p>A whatsapp text wasn't enough, and unfortunately, ik how to use llms and it html. So here you go-</p>
+    <a class="btn" href="#memories">Enter →</a>
+  </div>
+</header>
+
+<section id="memories" class="reveal">
+  <div class="section-tag">the official record</div>
+  <h2>Why the website?</h2>
+  <p class="intro">Coz letter hogaya last year, and im not even there to cut the cake at midnight, i mean i wouldn't cut the cake u get it right, yea so gharpe baithe baithe i thought i'd do something. </p>
+</section>
+
+<section id="gallery" class="reveal">
+  <div class="section-tag">evidence</div>
+  <h2>Photographic proof.</h2>
+  <p class="gallery-intro">look at some pictures i have of you, the timeline order is fucked up and there's not much time left to 12 so im keeping it as is okay sorry TwT</p>
+  <div class="gallery">
+    <article class="photo-card">
+      <div class="photo"><img src="images/photo2.jpg" alt="Dimple at an Aujla concert"></div>
+      <div class="caption"><strong>aujlaaaaaaaaa</strong><p>fun day bhaii need to go to more concerts<br>yes dhruv ko hata diya maine coz uska pose match ni kr raha tha this is good xd</p></div>
+    </article>
+    <article class="photo-card">
+      <div class="photo"><img src="images/photo1.jpg" alt="Dimple photobombing a selfie"></div>
+      <div class="caption"><strong>subtle, very subtle</strong><p>good photobomb</p></div>
+    </article>
+    <article class="photo-card">
+      <div class="photo"><img src="images/photo3.jpg" alt="A recent funny photo of Dimple"></div>
+      <div class="caption"><strong>HAHAHAHAHAHAHAAH</strong><p>need i something to write here lmaoooo the picture speaks so much given the recency, one more day very well spent, aise bhi more want hai</p></div>
+    </article>
+    <article class="photo-card">
+      <div class="photo"><img src="images/photo4.jpg" alt="Dimple and friends at the mall"></div>
+      <div class="caption"><p>pata nahi ye kya karne ki koshish kr rahe the tino us bulb ke pass TwT, bulb ke pass, stairs pe, alag alag stores ke saamne pictures loll bhai mall ka pura istemal kiya tha us din<br><br>it was sumaiiya ka birthday if im not wrong, isse it clicked to me that i dont remember going to YOUR PARTY (gussa emoji again, bc na likh paya last year na type kar sakta hu)<br><br>pls point out and remind me agar bhul gaya uk im a hamster brained, need one this year if not okay knife emoji</p></div>
+    </article>
+    <article class="photo-card">
+      <div class="photo"><img src="images/photo5.jpg" alt="A big chicken burger"></div>
+      <div class="caption"><strong>BIG YUMMY CHICKEN BURGER</strong><p>thats it itna hi likhna tha</p></div>
+    </article>
+    <article class="photo-card">
+      <div class="photo"><img src="images/photo6.jpg" alt="Dimple at Miya Kebabs, Meridian"></div>
+      <div class="caption"><p>miya kebabs, meridian, good picture. period.</p></div>
+    </article>
+  </div>
+</section>
+
+
+<div class="gallery-outro">
+  <p>i think i have more pictures but 6 is a good number, and again, not much time left till 12 im already gonna be late sorry hehe</p>
+</div>
+
+<section id="reel" class="reveal">
+  <div class="section-tag">the reel</div>
+  <h2>Because apparently photos weren't enough.</h2>
+  <div class="reel-wrap">
+    <video class="reel-video" controls playsinline preload="metadata">
+      <source src="dimple_reel.mp4" type="video/mp4">
+      Your browser doesn't support embedded video.
+    </video>
+    <div class="reel-caption">i have stuff saved for the right times :)</div>
+  </div>
+</section>
+
+<section id="letter" class="reveal">
+  <div class="section-tag">the end, or is it?</div>
+  <h2>Okay, enough jokes.</h2>
+  <div class="letter">
+    <p>Dear Dimple,<br><br>
+    Happy birthday.  idk if people realise how much place they take in someone's life just by existing,with random memories, fun convos, dinners, laughter and all small things that don't seem important until you look back in time<br><br>
+    I can safely say for me there's noone else in that position exc you,take the crown girl. Not much to write this time but yea, all i wanna say is time spent with you always turns out fun. kal hi baat krte krte i realised ki you're one hell of a good listener lol i blab too much when i do. Thanks for that. 2 years to the friendship, many more to come. Let's hang out, go out, do stupid stuff, eat stupid stuff, have fun and make more memories. Maybe i wont take down this website and we can edit and put more stuff here as we go lol. Storytime or smth of random events and tea. Okay done, byeeeeee <br><br>
+    ps - puri website banadi fir dekha ki 21 omg yayy legal daruu bhi ni kiya or chidhaya bhi ni ki you're 2 years older than me hahahhahahah. kardiya, tata.  </p>
+    <div class="sign">— Tanishq</div>
+  </div>
+</section>
+
+<footer class="reveal"><div class="big">30.08.2026</div><p>Happy birthdayy · made with an unreasonable amount of effortlessness</p></footer>
+
+<script>
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(x=>obs.observe(x));
+
+const music=document.getElementById("bgMusic");
+const musicButton=document.getElementById("musicButton");
+const musicText=document.getElementById("musicText");
+
+musicButton.addEventListener("click",async()=>{
+  if(music.paused){
+    try{
+      await music.play();
+      musicButton.classList.add("playing");
+      musicText.textContent="now playing :)";
+      musicButton.setAttribute("aria-label","Pause music");
+    }catch(e){
+      musicText.textContent="add Wallows.mp3";
+    }
+  }else{
+    music.pause();
+    musicButton.classList.remove("playing");
+    musicText.textContent="play something :)";
+    musicButton.setAttribute("aria-label","Play music");
+  }
+});
+
+const reel=document.querySelector(".reel-video");
+if(reel){
+  reel.addEventListener("play",()=>music.pause());
+  reel.addEventListener("ended",()=>{
+    music.play().catch(()=>{});
+  });
+}
+
+</script>
+</body>
+</html>
